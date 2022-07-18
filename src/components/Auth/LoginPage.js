@@ -1,39 +1,65 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Container, Row } from 'react-bootstrap';
+import { loginUser } from '../../services/Auth/LoginService';
 import "./LoginPage.css"
 
-export default function Login() {
+class Login extends React.Component {
 
-  let isAdmin = useParams();
-  console.log(isAdmin);
+  constructor(props) {
+    super(props);
 
-  return(
-    <Container fluid> 
-    <div className="login-wrapper">
-      <Row>
-      <h1>Please Log In</h1>
-      </Row>
-      <form>
-        <Row>
-        <label>
-          <p>Username</p>
-          <input type="text" />
-        </label>
-        </Row>
-        <Row>
-        <label>
-          <p>Password</p>
-          <input type="password" />
-        </label>
-        </Row>
-        <Row>
-        <div>
-          <button type="submit">Submit</button>
+    this.state = {
+      username: '',
+      password: '',
+      isAdmin: ''
+    };
+
+    this.onSubmit = this.onSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  onSubmit(e) {
+
+    e.preventDefault();
+    console.log(loginUser([this.state.username, this.state.password]));
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  render() {
+    return (
+      <Container fluid>
+        <div className="login-wrapper">
+          <Row>
+            <h1>Please Log In</h1>
+          </Row>
+          <form onSubmit={this.onSubmit}>
+            <Row>
+              <label>
+                <p>Username</p>
+                <input value={this.state.username} onChange={this.handleChange} type="text" name="username" />
+              </label>
+            </Row>
+            <Row>
+              <label>
+                <p>Password</p>
+                <input value={this.state.password} onChange={this.handleChange} type="password" name="password" />
+              </label>
+            </Row>
+            <Row>
+              <div>
+                <input type="submit" value="Submit" />
+              </div>
+            </Row>
+          </form>
         </div>
-        </Row>
-      </form>
-    </div>
-    </Container>
-  )
+      </Container>
+    )
+  }
 }
+
+export default Login;
