@@ -19,13 +19,13 @@ function LandingPage() {
 
             <Row>
                 <Col md={6}>
-                    <Link to="/login">
+                    <Link to="/login/false">
                         <img className="Link-logo" src={userLogo} alt="User Portal Icon" />
                     </Link>
                     <h4>User Login</h4>
                 </Col>
                 <Col md={6}>
-                    <Link to="/login">
+                    <Link to="/login/true">
                         <img className="Link-logo" src={adminLogo} alt="Admin Portal Icon" />
                     </Link>
                     <h4>Admin Login</h4>
