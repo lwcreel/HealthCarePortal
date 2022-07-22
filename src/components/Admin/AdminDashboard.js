@@ -7,6 +7,7 @@ import  reportLogo  from './../../resources/report-logo.png'
 
 export default function AdminDashboard() {
   return (
+
     <Container fluid >
       <Row>
         <h2>Admin Dashboard</h2>
