@@ -35,5 +35,16 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #000000;
+}
+
+.Dash-logos {
+  height: 30vmin;
+  width: 30vmin;
+}
+
+.dash-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40%;
 }

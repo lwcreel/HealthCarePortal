@@ -1,25 +1,31 @@
-import React from 'react';
-import { Container, Row, Col, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import medLogo from './../../resources/med-bottle-logo.jpg'
-import reportLogo from './../../resources/report-logo.png'
+import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+
+import MedicineShop from './MedicineShop';
 import NavBar from './UserNavbar';
 
-export default function Dashboard() {
-  return (
-    
-    <div>
-    <NavBar />
+class Dashboard extends Component() {
 
-    <Container fluid >
-      <Row>
-        <h2>User Dashboard</h2>
-      </Row>
-      <Row>
-        <Col md={6}><Link to="/user/medicine"><img className="Link-logo" src={medLogo} alt="Search for Meds" /></Link></Col>
-        <Col md={6}><Link to="/user/status"><img className="Link-logo" src={reportLogo} alt="Order Status" /></Link></Col>
-      </Row>
-    </Container>
-    </div>
+  state = {
+
+    // this should be set by API call
+    fundAmount: 1000
+  };
+
+  render() {
+    return (
+      <div className="dash-wrapper">
+        <Container fluid>
+          <Row><NavBar /></Row>
+          <Row><h2>User Dashboard</h2></Row>
+          <Row>
+            <MedicineShop />
+          </Row>
+        </Container>
+        <h5 align="right">Funds: {this.state.fundAmount}</h5>
+      </div>
     );
+  }
 }
+
+export default Dashboard;
