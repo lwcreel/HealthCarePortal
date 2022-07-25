@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Medicine from "../Medicine";
 
 
@@ -24,7 +24,6 @@ class MedicineShop extends Component {
         return (
             <div>
                 <h4>Shopping Cart</h4>
-                <Row>
                     {this.state.medicines.map((med) => {
                         return (
                             <Medicine medicine={med} key={med.id}>
@@ -32,7 +31,6 @@ class MedicineShop extends Component {
                             </Medicine>
                         );
                     })}
-                </Row>
             </div>
         );
     }

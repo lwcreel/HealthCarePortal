@@ -6,11 +6,11 @@ export default function Medicine(prop) {
 
     return (
         <Col lg={4}>
-            <Card bg="dark" text="light">
+            <Card className="m-2">
                 <Card.Header>{prop.medicine.medicineName}</Card.Header>
                 <Card.Body>$ {prop.medicine.price}</Card.Body>
 
-                <Card.Footer>
+                <Card.Body>
                     <span className="badge">{prop.medicine.quantity}</span>
                     <ButtonGroup>
                         <Button variant="outline-success" onClick={() => { /*props.onIncrement(prop.medicine, 10);*/ }}>
@@ -24,7 +24,7 @@ export default function Medicine(prop) {
 
                     <div>{prop.children}</div>
 
-                </Card.Footer>
+                </Card.Body>
             </Card>
         </Col>
     );

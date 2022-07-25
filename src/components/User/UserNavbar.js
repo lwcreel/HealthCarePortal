@@ -1,14 +1,16 @@
 import React from 'react';
-import { Nav } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 
- export default function UserNavbar() {
+export default function UserNavbar() {
 
-        return (
-            <Nav>
-                <Nav.Link to="/dashboard" className='App-link'> Home </Nav.Link>
-                <Nav.Link to="/dashboard/cart " className='App-link'> Cart </Nav.Link>
-                <Nav.Link to="/dashboard/status" className='App-link'> Status </Nav.Link>
-                <Nav.Link to="/dashboard/funds" className='App-link'> Funds </Nav.Link>
+    return (
+        <Navbar variant="primary" bg="primary">
+            <Nav variant="pills" className='me-auto'>
+                <Nav.Link to="/dashboard"> Home </Nav.Link>
+                <Nav.Link to="/dashboard/cart "> Cart </Nav.Link>
+                <Nav.Link to="/dashboard/status"> Status </Nav.Link>
+                <Nav.Link to="/dashboard/funds"> Funds </Nav.Link>
             </Nav>
-        );   
+        </Navbar>
+    );
 }
