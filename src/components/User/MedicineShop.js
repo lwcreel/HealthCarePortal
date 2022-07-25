@@ -23,14 +23,13 @@ class MedicineShop extends Component {
     render() {
         return (
             <div>
-                <h4>Shopping Cart</h4>
-                    {this.state.medicines.map((med) => {
-                        return (
-                            <Medicine medicine={med} key={med.id}>
-                                <Button variant="primary">Add to Cart</Button>
-                            </Medicine>
-                        );
-                    })}
+                {this.state.medicines.map((med) => {
+                    return (
+                        <Medicine medicine={med} key={med.id}>
+                            <Button variant="primary">Add to Cart</Button>
+                        </Medicine>
+                    );
+                })}
             </div>
         );
     }

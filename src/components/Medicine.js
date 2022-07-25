@@ -5,7 +5,7 @@ import { Col, Card, ButtonGroup, Button } from 'react-bootstrap';
 export default function Medicine(prop) {
 
     return (
-        <Col lg={4}>
+        <Col lg={3}>
             <Card className="m-2">
                 <Card.Header>{prop.medicine.medicineName}</Card.Header>
                 <Card.Body>$ {prop.medicine.price}</Card.Body>
