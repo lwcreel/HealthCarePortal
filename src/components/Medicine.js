@@ -6,7 +6,7 @@ export default function Medicine(prop) {
 
     return (
         <Col lg={4}>
-            <Card bg='dark' text='dark'>
+            <Card bg="dark" text="light">
                 <Card.Header>{prop.medicine.medicineName}</Card.Header>
                 <Card.Body>$ {prop.medicine.price}</Card.Body>
 
