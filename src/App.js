@@ -11,7 +11,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App" style={{"padding-top": "10vh"}}>
+      <div className="App" style={{"paddingTop": "10vh"}}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login/:isAdmin" element={<Login />} />
