@@ -1,4 +1,5 @@
 import DeleteMedForm from "./Forms/DeleteMedForm";
+import ReportForm from "./Forms/ReportForm";
 
 
 export default function FormManager(formToRender) {
@@ -8,30 +9,18 @@ export default function FormManager(formToRender) {
 
     switch (formToRender.formToRender) {
         case 0:
-            form = <p>stock report</p>;
+            form = <ReportForm />;
             break;
         case 1:
-            form = <p>sales report</p>;
+            form = <p>create med</p>;
             break;
         case 2:
-            form = <p>medicine report</p>;
-            break;
-        case 3:
-            form = <p>order report</p>;
-            break;
-        case 4:
-            form = <p>data report</p>;
-            break;
-        case 5:
-            form = <p>add med</p>;
-            break;
-        case 6:
             form = <p>update med</p>;
             break;
-        case 7:
-            form = <DeleteMedForm/>;
+        case 3:
+            form = <DeleteMedForm />;
             break;
-        case 8:
+        case 4:
             form = <p>view report</p>;
             break;
         case 99:

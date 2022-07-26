@@ -1,6 +1,5 @@
 import { Container, Row } from 'react-bootstrap';
 
-
 export default function DeleteMedForm() {
     return (
         <Container fluid>
