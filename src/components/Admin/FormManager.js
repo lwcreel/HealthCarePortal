@@ -1,3 +1,4 @@
+import DeleteMedForm from "./Forms/DeleteMedForm";
 
 
 export default function FormManager(formToRender) {
@@ -28,7 +29,7 @@ export default function FormManager(formToRender) {
             form = <p>update med</p>;
             break;
         case 7:
-            form = <p>remove med</p>;
+            form = <DeleteMedForm/>;
             break;
         case 8:
             form = <p>view report</p>;
