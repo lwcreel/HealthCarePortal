@@ -1,31 +1,45 @@
-import React from "react";
+import React, {Component} from "react";
 import { Col, Card, ButtonGroup, Button } from 'react-bootstrap';
 
 
-export default function Medicine(prop) {
+export default class Product extends Component {
 
-    return (
-        <Col lg={3}>
-            <Card className="m-2">
-                <Card.Header>{prop.medicine.medicineName}</Card.Header>
-                <Card.Body>$ {prop.medicine.price}</Card.Body>
+    constructor(props) {
 
-                <Card.Body>
-                    <span className="badge">{prop.medicine.quantity}</span>
-                    <ButtonGroup>
-                        <Button variant="outline-success" onClick={() => { /*props.onIncrement(prop.medicine, 10);*/ }}>
-                            +
-                        </Button>
+        super(props);
+        this.state = {
+            medicine: this.props.medicine
+        }
+    }
 
-                        <Button variant="outline-success" onClick={() => { /*props.onDecrement(prop.medicine, 0);*/ }}>
-                            -
-                        </Button>
-                    </ButtonGroup>
+    render() {
+        return (
 
-                    <div>{prop.children}</div>
+            <Col lg={3}>
+                <Card className="m-2">
+                    <Card.Header>{this.state.medicine.medicineName}</Card.Header>
+                    <Card.Body>$ {this.state.medicine.price}</Card.Body>
 
-                </Card.Body>
-            </Card>
-        </Col>
-    );
+                    <Card.Body>
+                        <span className="badge">{this.state.medicine.quantity}</span>
+                        <ButtonGroup>
+                            <Button variant="outline-success" onClick={() => { this.props.onIncrement(this.state.medicine, 10); }}>
+                                +
+                            </Button>
+
+                            <Button variant="outline-success" onClick={() => { this.props.onDecrement(this.state.medicine, 0); }}>
+                                -
+                            </Button>
+                        </ButtonGroup>
+
+                        <div>{this.props.children}</div>
+
+                    </Card.Body>
+                </Card>
+            </Col>
+        );
+    }
+
+    componentDidUpdate() {
+      }
 }

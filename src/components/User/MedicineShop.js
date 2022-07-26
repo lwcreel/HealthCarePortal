@@ -25,7 +25,12 @@ class MedicineShop extends Component {
             <div>
                 {this.state.medicines.map((med) => {
                     return (
-                        <Medicine medicine={med} key={med.id}>
+                        <Medicine
+                            medicine={med}
+                            key={med.id}
+                            onIncrement={this.handleIncrement}
+                            onDecrement={this.handleDecrement}
+                        >
                             <Button variant="primary">Add to Cart</Button>
                         </Medicine>
                     );
@@ -38,6 +43,38 @@ class MedicineShop extends Component {
 
         this.setState({ medicines: this.state.medicines });
     };
+
+    //executes when the user clicks on + button.
+    handleIncrement = (medicine, maxValue) => {
+        //get index of selected medicine
+        let allMeds = [...this.state.medicines];
+        let index = allMeds.indexOf(medicine);
+
+        if (allMeds[index].quantity < maxValue) {
+            allMeds[index].quantity++;
+
+            //update the state of current component (parent component)
+            this.setState({ medicines: allMeds });
+        }
+    };
+
+    //executes when the user clicks on - button.
+    handleDecrement = (medicine, minValue) => {
+        //get index of selected medicine
+        let allMeds = [...this.state.medicines];
+        let index = allMeds.indexOf(medicine);
+
+        if (allMeds[index].quantity > minValue) {
+            allMeds[index].quantity--;
+
+            //update the state of current component (parent component)
+            this.setState({ medicines: allMeds });
+        }
+    };
+
+    componentDidUpdate(prevProps, prevState) {
+        //console.log("componentDidUpdate - medicine");
+      }
 }
 
 export default MedicineShop
