@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import  medLogo  from './../../resources/med-bottle-logo.jpg'
 import  reportLogo  from './../../resources/report-logo.png'
 
+// TODO: Convert dashboards to navbar
 
 export default function AdminDashboard() {
   return (
 
     <Container fluid >
       <Row>
-        <h2>Admin Dashboard</h2>
+        <p>Admin Dashboard</p>
       </Row>
       <Row>
         <Col md={6}><Link to="/admin/medicine"><img className="Link-logo" src={medLogo} alt="Update Med Data"/></Link></Col>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { loginUser } from '../../services/Auth/LoginService';
-import "./LoginPage.css"
 
 class Login extends React.Component {
 
@@ -33,9 +32,9 @@ class Login extends React.Component {
   render() {
     return (
       <Container fluid>
-        <div className="login-wrapper">
+        <div>
           <Row>
-            <h1>Please Log In</h1>
+            <p>Please Log In</p>
           </Row>
           <form onSubmit={this.onSubmit}>
             <Row>

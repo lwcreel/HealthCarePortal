@@ -6,7 +6,7 @@ export default function AdminMedDashboard() {
   return (
     <Container fluid>
       <Row>
-        <h2>Medicine Operations</h2>
+        <p>Medicine Operations</p>
       </Row>
       <Row>
         <Col md={4}><Link to="/admin/medicine/add">Add Medicine</Link></Col>

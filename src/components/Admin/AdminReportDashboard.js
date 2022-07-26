@@ -6,7 +6,7 @@ export default function AdminReportDashboard() {
   return (
     <Container fluid>
       <Row>
-        <h2>Generate Reports</h2>
+        <p>Generate Reports</p>
       </Row>
       <Row>
         <Col md={4}><Link to="/admin/reports/stock">Stock Report</Link></Col>
