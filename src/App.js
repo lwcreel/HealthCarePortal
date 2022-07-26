@@ -4,9 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from "./components/Auth/LoginPage.js";
 import AdminDashboard from "./components/Admin/AdminDashboard.js";
 import Dashboard from "./components/User/Dashboard.js";
-import AdminMedDashboard from "./components/Admin/AdminMedDashboard.js";
-import AdminReportDashboard from "./components/Admin/AdminReportDashboard.js";
-import MedicineShop from "./components/User/MedicineShop.js";
 
 // TODO: Add admin and user service routing 
 
@@ -19,10 +16,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login/:isAdmin" element={<Login />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/medicine" element ={<AdminMedDashboard />} />
-          <Route path="/admin/reports" element ={<AdminReportDashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/shop" element={<MedicineShop />} />
         </Routes>
       </div>
     </BrowserRouter>
