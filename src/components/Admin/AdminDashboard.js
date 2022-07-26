@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import DataOperationForms from './DataOperationForms';
-import ReportForms from './ReportForms';
+import FormManager from './FormManager';
 
 export default class AdminDashboard extends Component {
 
@@ -26,7 +25,7 @@ export default class AdminDashboard extends Component {
 
         <Navbar variant="primary" bg="primary" fixed="top">
           <Nav justify variant="pills" className='me-auto'>
-            <Nav.Link href="/dashboard"> Home </Nav.Link>
+            <Nav.Link onClick={(e) => this.handleFormChange(99, e)}> Home </Nav.Link>
             <NavDropdown title="Generate Report">
               <NavDropdown.Item onClick={(e) => this.handleFormChange(0, e)}>Stock Report</NavDropdown.Item>
               <NavDropdown.Item onClick={(e) => this.handleFormChange(1, e)}>Sales Report</NavDropdown.Item>
@@ -44,9 +43,7 @@ export default class AdminDashboard extends Component {
             <Nav.Link> Sign Out </Nav.Link>
           </Nav>
         </Navbar>
-
-        <DataOperationForms formToRender={this.state.formToRender} />
-        <ReportForms formToRender={this.state.formToRender} />
+        <FormManager formToRender={this.state.formToRender} />
       </Container>
     );
   }
