@@ -1,5 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { loginUser } from '../../services/Auth/LoginService';
 
 class Login extends React.Component {
@@ -20,7 +22,9 @@ class Login extends React.Component {
   onSubmit(e) {
 
     e.preventDefault();
-    console.log(loginUser([this.state.username, this.state.password]));
+    let p = loginUser([this.state.username, this.state.password]);
+    const login = ReactDOM.createRoot(document.getElementById('login'));
+    login.render(<a href={p}>Go to Dashboard!</a>)
   }
 
   handleChange(e) {
@@ -50,7 +54,7 @@ class Login extends React.Component {
               </label>
             </Row>
             <Row>
-              <div>
+              <div id="login">
                 <input type="submit" value="Submit" />
               </div>
             </Row>
