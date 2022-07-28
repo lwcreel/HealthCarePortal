@@ -8,14 +8,13 @@ export default function ReportForm() {
                     <Row>
                         <label>
                             <p>Select a report to generate:</p>
-                            <input name="reportType" list="allowedReports"/>
-                                <datalist id="allowedReports">
-                                    <option value="Stock Report" />
-                                    <option value="Sales Report" />
-                                    <option value="Medicine Report" />
-                                    <option value="Order Report" />
-                                    <option value="Data Report" />
-                                </datalist>
+                            <select id="allowedReports">
+                                <option value="Stock Report" />
+                                <option value="Sales Report" />
+                                <option value="Medicine Report" />
+                                <option value="Order Report" />
+                                <option value="Data Report" />
+                            </select>
                         </label>
                     </Row>
                     <Row>

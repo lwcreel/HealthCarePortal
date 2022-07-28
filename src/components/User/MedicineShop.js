@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Button } from "react-bootstrap";
 import Medicine from "../Medicine";
+import SearchBar from "./SearchBar";
 
 
 class MedicineShop extends Component {
@@ -23,6 +24,7 @@ class MedicineShop extends Component {
     render() {
         return (
             <div>
+                <SearchBar />
                 {this.state.medicines.map((med) => {
                     return (
                         <Medicine
@@ -35,6 +37,8 @@ class MedicineShop extends Component {
                         </Medicine>
                     );
                 })}
+
+                <Button variant="primary" style={{"padding": "10px"}}><h2>Add Selected to Cart</h2></Button>
             </div>
         );
     }

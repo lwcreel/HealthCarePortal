@@ -1,25 +1,54 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Navbar } from 'react-bootstrap';
 
 import MedicineShop from './MedicineShop';
-import UserNavbar from './UserNavbar';
+import SearchBar from './SearchBar';
 
 
 class Dashboard extends Component {
 
-  state = {
 
-    availableFunds: 1000
+  constructor(props) {
+
+    super(props);
+    this.handleComponentChange = this.handleComponentChange.bind(this);
+    this.state = {
+
+      availableFunds: 1000,
+      componentToRender: <SearchBar />
+    }
+  }
+
+  handleComponentChange(component, e) {
+
+    this.setState({ componentToRender: component });
   }
 
   render() {
     return (
-        <Container fluid>
-          <Row><Col><UserNavbar /></Col></Row>
-          <Row><Col>User Dashboard</Col></Row>
-          <Row><Col><MedicineShop /></Col></Row>
-          <div align="right">Funds: ${this.state.availableFunds}</div>
-        </Container>
+      <Container fluid id="user-dashboard">
+        <Row><Col><Navbar variant="primary" bg="primary" expand="lg" fixed="top">
+          <Nav justify variant="pills" className='me-auto'>
+
+            <Nav.Link 
+              to="/dashboard"
+              onClick={(e) => this.handleComponentChange(<SearchBar />)}>
+                Home
+            </Nav.Link>
+            
+            <Nav.Link 
+              to="/dashboard/shop" 
+              onClick={(e) => this.handleComponentChange(<MedicineShop />)}>
+                Browse
+            </Nav.Link>
+            <Nav.Link to="/dashboard/cart "> View Cart </Nav.Link>
+            <Nav.Link to="/dashboard/status"> Order Status </Nav.Link>
+            <Nav.Link to="/dashboard/funds"> Funds: ${this.state.availableFunds} </Nav.Link>
+          </Nav>
+        </Navbar></Col></Row>
+        <Row><Col>User Dashboard</Col></Row>
+        <Row><Col>{this.state.componentToRender}</Col></Row>
+      </Container>
     );
   }
 }

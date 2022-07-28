@@ -18,7 +18,7 @@ export default class Product extends Component {
             <Col lg={3}>
                 <Card className="m-2">
                     <Card.Header>{this.state.medicine.medicineName}</Card.Header>
-                    <Card.Body>$ {this.state.medicine.price}</Card.Body>
+                    <Card.Body>$ {this.state.medicine.price * this.state.medicine.quantity}</Card.Body>
 
                     <Card.Body>
                         <span className="badge">{this.state.medicine.quantity}</span>
