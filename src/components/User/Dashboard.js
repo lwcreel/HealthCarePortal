@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Nav, Navbar } from 'react-bootstrap';
+import Cart from './Cart';
 
 import MedicineShop from './MedicineShop';
 import SearchBar from './SearchBar';
@@ -15,7 +16,8 @@ class Dashboard extends Component {
     this.state = {
 
       availableFunds: 1000,
-      componentToRender: <SearchBar />
+      componentToRender: <SearchBar />,
+      cart: []
     }
   }
 
@@ -35,13 +37,19 @@ class Dashboard extends Component {
               onClick={(e) => this.handleComponentChange(<SearchBar />)}>
                 Home
             </Nav.Link>
-            
+
             <Nav.Link 
               to="/dashboard/shop" 
               onClick={(e) => this.handleComponentChange(<MedicineShop />)}>
                 Browse
             </Nav.Link>
-            <Nav.Link to="/dashboard/cart "> View Cart </Nav.Link>
+
+            <Nav.Link 
+              to="/dashboard/cart"
+              onClick={(e) => this.handleComponentChange(<Cart />)}> 
+              View Cart 
+            </Nav.Link>
+
             <Nav.Link to="/dashboard/status"> Order Status </Nav.Link>
             <Nav.Link to="/dashboard/funds"> Funds: ${this.state.availableFunds} </Nav.Link>
           </Nav>

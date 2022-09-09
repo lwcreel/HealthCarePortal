@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Col, Card, ButtonGroup, Button } from 'react-bootstrap';
 
 
-export default class Product extends Component {
+export default class Medicine extends Component {
 
     constructor(props) {
 

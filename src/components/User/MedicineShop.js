@@ -18,6 +18,8 @@ class MedicineShop extends Component {
                 { id: 3, medicineName: "Benadryl", price: 9.99, quantity: 0 },
                 { id: 4, medicineName: "Amoxocillin", price: 9.99, quantity: 0 }
             ],
+
+            cart: []
         };
     }
 
@@ -33,12 +35,12 @@ class MedicineShop extends Component {
                             onIncrement={this.handleIncrement}
                             onDecrement={this.handleDecrement}
                         >
-                            <Button variant="primary">Add to Cart</Button>
+                            <Button variant="primary" onClick={() => { this.addToCart(med) }}>Add to Cart</Button>
                         </Medicine>
                     );
                 })}
 
-                <Button variant="primary" style={{"padding": "10px"}}><h2>Add Selected to Cart</h2></Button>
+                <Button variant="primary" style={{ "padding": "10px" }}><h2>Add Selected to Cart</h2></Button>
             </div>
         );
     }
@@ -76,9 +78,21 @@ class MedicineShop extends Component {
         }
     };
 
+    addToCart = (medicine) => {
+
+        console.log(this.cart);
+
+        if (medicine.quantity > 0) {
+            let newCart = [...this.state.cart];
+            newCart.push(medicine);
+            this.setState({ cart: newCart });
+        }
+        console.log(this.state.cart);
+    };
+
     componentDidUpdate(prevProps, prevState) {
         //console.log("componentDidUpdate - medicine");
-      }
+    }
 }
 
 export default MedicineShop
