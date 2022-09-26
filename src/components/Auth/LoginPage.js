@@ -12,7 +12,7 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
-      isAdmin: ''
+      isAdmin: this.props.isAdmin
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -34,6 +34,12 @@ class Login extends React.Component {
   }
 
   render() {
+    let RegisterButton = "";
+
+    if (this.state.isAdmin === "false") {
+      RegisterButton = (<Row>< div id = "register" ><input type="button" value="Register" /></div ></Row >);
+    }
+
     return (
       <Container fluid>
         <div>
@@ -58,6 +64,7 @@ class Login extends React.Component {
                 <input type="submit" value="Submit" />
               </div>
             </Row>
+            {RegisterButton}
           </form>
         </div>
       </Container>
