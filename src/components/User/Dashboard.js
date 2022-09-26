@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Nav, Navbar } from 'react-bootstrap';
 import Cart from './Cart';
-
 import MedicineShop from './MedicineShop';
+import OrderStatus from './OrderStatus';
 import SearchBar from './SearchBar';
 
 
@@ -50,7 +50,11 @@ class Dashboard extends Component {
               View Cart 
             </Nav.Link>
 
-            <Nav.Link to="/dashboard/status"> Order Status </Nav.Link>
+            <Nav.Link 
+            to="/dashboard/status"
+            onClick={(e) => this.handleComponentChange(<OrderStatus />)}> 
+            Order Status 
+            </Nav.Link>
             <Nav.Link to="/dashboard/funds"> Funds: ${this.state.availableFunds} </Nav.Link>
           </Nav>
         </Navbar></Col></Row>
