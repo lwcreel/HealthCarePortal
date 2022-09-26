@@ -21,3 +21,7 @@ export function loginUser(data) {
         return "/admin";
     }
 }
+
+export function registerUser(data) {
+    return true;
+}

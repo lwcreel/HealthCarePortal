@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { loginUser } from '../../services/Auth/LoginService';
+import { loginUser } from '../../services/Auth/AuthService';
 
 class Login extends React.Component {
 
@@ -37,7 +37,15 @@ class Login extends React.Component {
     let RegisterButton = "";
 
     if (this.state.isAdmin === "false") {
-      RegisterButton = (<Row>< div id = "register" ><input type="button" value="Register" /></div ></Row >);
+      RegisterButton = (
+        <Row>
+          <Link to="/register">
+            <div id="register" >
+              <input type="button" value="Register" />
+            </div >
+          </Link>
+        </Row >
+      );
     }
 
     return (
