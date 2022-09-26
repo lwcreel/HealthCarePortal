@@ -81,8 +81,6 @@ export default class RegisterUser extends Component {
                 <div className="col-md-12">
                     <div className="card card-container">
                         <span style={{ 'color': 'green' }}>{"Registration Successful!"}</span>
-                    </div>
-                    <div className="col-md-6 d-flex justify-content-center align-items-center">
                         <button className="btn btn-primary btn-block">Return to Login Page</button>
                     </div>
                 </div>
