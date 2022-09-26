@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import { addMedicine } from '../../../services/Admin/MedicineService';
+import { updateMedicine } from '../../../services/Admin/MedicineService';
 
-export default function AddMedForm() {
+export default function UpdateMedForm() {
 
     let [medName, setMedName] = useState("");
     let [companyName, setCompanyName] = useState("");
@@ -13,7 +13,7 @@ export default function AddMedForm() {
 
     return (
         <Container fluid>
-            <div>
+            <div> Leave unupdated fields not being updated blank
                 <form onSubmit={(e) => {
                     e.preventDefault();
                     setData({
@@ -23,7 +23,7 @@ export default function AddMedForm() {
                         uses: uses,
                         quantity: quantity,
                     });
-                    addMedicine(data);
+                    updateMedicine(data);
                 }}>
                     <Row>
                         <label>Medicine Name</label>
