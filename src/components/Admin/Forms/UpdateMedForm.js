@@ -13,7 +13,7 @@ export default function UpdateMedForm() {
 
     return (
         <Container fluid>
-            <div> Leave unupdated fields not being updated blank
+            <div> Leave fields not being updated blank
                 <form onSubmit={(e) => {
                     e.preventDefault();
                     setData({

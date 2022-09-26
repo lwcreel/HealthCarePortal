@@ -2,6 +2,7 @@ import AddMedForm from "./Forms/AddMedForm";
 import DeleteMedForm from "./Forms/DeleteMedForm";
 import ReportForm from "./Forms/ReportForm";
 import UpdateMedForm from "./Forms/UpdateMedForm";
+import ViewReports from "./ViewReports";
 
 
 export default function FormManager(formToRender) {
@@ -23,7 +24,7 @@ export default function FormManager(formToRender) {
             form = <DeleteMedForm />;
             break;
         case 4:
-            form = <p>view report</p>;
+            form = <ViewReports />;
             break;
         case 99:
             form = <p>Admin Dashboard</p>
