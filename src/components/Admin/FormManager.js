@@ -1,3 +1,4 @@
+import AddMedForm from "./Forms/AddMedForm";
 import DeleteMedForm from "./Forms/DeleteMedForm";
 import ReportForm from "./Forms/ReportForm";
 
@@ -12,7 +13,7 @@ export default function FormManager(formToRender) {
             form = <ReportForm />;
             break;
         case 1:
-            form = <p>create med</p>;
+            form = <AddMedForm />;
             break;
         case 2:
             form = <p>update med</p>;

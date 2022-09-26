@@ -5,6 +5,7 @@ import input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 import { registerUser } from '../../services/Auth/AuthService';
+import { Link } from "react-router-dom";
 
 export default class RegisterUser extends Component {
     constructor(props) {
@@ -81,7 +82,7 @@ export default class RegisterUser extends Component {
                 <div className="col-md-12">
                     <div className="card card-container">
                         <span style={{ 'color': 'green' }}>{"Registration Successful!"}</span>
-                        <button className="btn btn-primary btn-block">Return to Login Page</button>
+                        <Link to="/login/false"><button className="btn btn-primary btn-block">Return to Login Page</button></Link>
                     </div>
                 </div>
         }
