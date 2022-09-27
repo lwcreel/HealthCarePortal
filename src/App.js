@@ -5,6 +5,7 @@ import Login from "./components/Auth/LoginPage.js";
 import AdminDashboard from "./components/Admin/AdminDashboard.js";
 import Dashboard from "./components/User/Dashboard.js";
 import Register from "./components/Auth/RegisterUser.js";
+import Profile from "./components/Profile.js";
 
 // TODO: Add admin and user service routing 
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </BrowserRouter>

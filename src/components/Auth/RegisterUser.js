@@ -1,13 +1,9 @@
-import React, { Component, useRef, useState } from "react";
-import { Container, Row } from 'react-bootstrap';
+import React, { useRef, useState } from "react";
 import Form from "react-validation/build/form";
-import input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
-
 import AuthService from "../../services/Auth/AuthService";
-import { useNavigate } from "react-router-dom";
 
 const required = (value) => {
     if (!value) {
@@ -80,8 +76,6 @@ const Register = () => {
             );
         }
     }
-
-    let navigate = useNavigate();
 
     const form = useRef();
     const checkBtn = useRef();

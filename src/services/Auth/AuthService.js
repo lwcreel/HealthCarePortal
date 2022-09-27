@@ -1,31 +1,5 @@
 import axios from "axios";
 
-export function loginUser(data) {
-
-    /* uncomment to dynamically log in
-    let fetchUri="http://localhost:8080/login?id=" + data[0] + "&password=" + data[1];
-
-    const response = await fetch(fetchUri, {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'},
-    }).then((response) => response);
-
-    console.log(response);
-    */
-
-    if(data[0] === "user" && data[1] === "user_password") {
-        return "/dashboard";
-    }
-
-    if(data[0] === "admin" && data[1] === "admin_password") {
-        return "/admin";
-    }
-}
-
-export function registerUser(data) {
-    return true;
-}
-
 const API_URL = "http://localhost:8080/api/auth/";
 
 const register = (firstname, lastname, username, email, phonenumber, password) => {
@@ -46,8 +20,8 @@ const login = (username, password) => {
       password,
     })
     .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+      if (response.data.token) {
+        window.sessionStorage.setItem("user", JSON.stringify(response.data));
       }
 
       return response.data;
@@ -59,7 +33,7 @@ const logout = () => {
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
+  return JSON.parse(window.sessionStorage.getItem("user"));
 };
 
 const AuthService = {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Nav, Navbar } from 'react-bootstrap';
+import Profile from "../Profile";
 import Cart from './Cart';
 import MedicineShop from './MedicineShop';
 import OrderStatus from './OrderStatus';
@@ -53,9 +54,10 @@ class Dashboard extends Component {
             <Nav.Link 
             to="/dashboard/status"
             onClick={(e) => this.handleComponentChange(<OrderStatus />)}> 
-            Order Status 
+            Orders 
             </Nav.Link>
-            <Nav.Link to="/dashboard/funds"> Funds: ${this.state.availableFunds} </Nav.Link>
+            <Nav.Link to="/profile" onClick={(e) => this.handleComponentChange(<Profile />)}> Profile </Nav.Link>
+            <Nav.Link to="/dashboard/funds"> ${this.state.availableFunds} </Nav.Link>
           </Nav>
         </Navbar></Col></Row>
         <Row><Col>User Dashboard</Col></Row>
