@@ -60,7 +60,6 @@ class Dashboard extends Component {
             <Nav.Link to="/dashboard/funds"> ${this.state.availableFunds} </Nav.Link>
           </Nav>
         </Navbar></Col></Row>
-        <Row><Col>User Dashboard</Col></Row>
         <Row><Col>{this.state.componentToRender}</Col></Row>
       </Container>
     );

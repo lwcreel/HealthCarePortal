@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { Container } from "react-bootstrap";
 
 // TODO: Dynamically retrieve data
 class OrderStatus extends Component {
@@ -29,8 +30,8 @@ class OrderStatus extends Component {
 
     render() {
         return (
-            <div>
-                Order Details
+            <Container fluid>
+                <div className="jumbotron">Order Details</div>
                 <table>
                     <thead>
                         <tr>
@@ -59,7 +60,7 @@ class OrderStatus extends Component {
                         })}
                     </tbody>
                 </table>
-            </div>
+            </Container>
         )
     }
 }
