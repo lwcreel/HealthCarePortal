@@ -20,9 +20,6 @@ const Login = () => {
   const handleLogin = (e) => {
 
     e.preventDefault();
-    // let p = loginUser([this.state.username, this.state.password]);
-    // const login = ReactDOM.createRoot(document.getElementById('login'));
-    // login.render(<a href={p}>Go to Dashboard!</a>)
 
     setMessage("");
     setLoading(true);

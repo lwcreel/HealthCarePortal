@@ -1,92 +1,155 @@
-import React, { Component } from "react";
+import React, { Component, useRef, useState } from "react";
 import { Container, Row } from 'react-bootstrap';
 import Form from "react-validation/build/form";
 import input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import { isEmail } from "validator";
 
-import { registerUser } from '../../services/Auth/AuthService';
-import { Link } from "react-router-dom";
 
-export default class RegisterUser extends Component {
-    constructor(props) {
-        super(props);
+import AuthService from "../../services/Auth/AuthService";
+import { useNavigate } from "react-router-dom";
 
-        this.state = {
-            email: "",
-            password: "",
-            firstName: "",
-            lastName: "",
-            dateOfBirth: "",
-            phoneNo: "",
-            address: "",
-            message: "",
-            successful: true
-        };
-
-        this.onSubmit = this.onSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+const required = (value) => {
+    if (!value) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                This field is required!
+            </div>
+        );
     }
+};
 
-    onSubmit(e) {
+const validEmail = (value) => {
+    if (!isEmail(value)) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                This is not a valid email.
+            </div>
+        );
+    }
+};
+
+const validUsername = (value) => {
+    if (value.length < 3 || value.length > 20) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                The username must be between 3 and 20 characters.
+            </div>
+        );
+    }
+};
+
+const validPassword = (value) => {
+    if (value.length < 6 || value.length > 40) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                The password must be between 6 and 40 characters.
+            </div>
+        );
+    }
+};
+
+const Register = () => {
+
+    const handleRegistration = (e) => {
+
         e.preventDefault();
-        registerUser();
-    }
 
-    handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
-    }
+        setMessage("");
+        setSuccessful(true);
 
-    render() {
-        let elements = "";
+        form.current.validateAll();
 
-        if (this.state.successful === false) {
-            elements =
-                <Container>
-                    <Form>
-                        <Row>
-                            <label>Email</label>
-                            <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
-                        </Row>
-                        <Row>
-                            <label>Password</label>
-                            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                        </Row>
-                        <Row>
-                            <label>First Name</label>
-                            <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} />
-                        </Row>
-                        <Row>
-                            <label>Last Name</label>
-                            <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} />
-                        </Row>
-                        <Row>
-                            <label>DoB</label>
-                            <input type="date" name="dateOfBirth" value={this.state.dateOfBirth} onChange={this.handleChange} />
-                        </Row>
-                        <Row>
-                            <label>Phone</label>
-                            <input type="text" name="phoneNo" value={this.state.phoneNo} onChange={this.handleChange} />
-                        </Row>
-                        <Row>
-                            <label>Address</label>
-                            <input type="text" name="address" value={this.state.address} onChange={this.handleChange} />
-                        </Row>
-                        <Row>
-                            <button className="btn btn-primary btn-block">Sign Up</button>
-                        </Row>
-                    </Form>
-                </Container>
+        if (checkBtn.current.context._errors.length === 0) {
+            AuthService.register(username, password).then(
+                (response) => {
+                    setMessage(response.data.message);
+                    setSuccessful(true);
+                },
+                (error) => {
+                    const resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+
+                    setSuccessful(false);
+                    setMessage(resMessage);
+                }
+            );
         }
-        else {
-            elements =
-                <div className="col-md-12">
-                    <div className="card card-container">
-                        <span style={{ 'color': 'green' }}>{"Registration Successful!"}</span>
-                        <Link to="/login/false"><button className="btn btn-primary btn-block">Return to Login Page</button></Link>
-                    </div>
-                </div>
-        }
-
-        return (elements);
     }
-}
+
+    let navigate = useNavigate();
+
+    const form = useRef();
+    const checkBtn = useRef();
+
+    const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [successful, setSuccessful] = useState(false);
+    const [message, setMessage] = useState("");
+
+    return (
+        <div className="col-md-4 offset-md-4">
+            <div className="card card-container">
+
+                <Form onSubmit={handleRegistration} ref={form}>
+                    {!successful && (
+                        <div>
+                            <div className="form-group" style={{ padding: "10px" }}>
+                                <label htmlFor="firstName">First Name</label>
+                                <input value={firstName} type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)} className="form-control" validations={[required]} />
+                            </div>
+
+                            <div className="form-group" style={{ padding: "10px" }}>
+                                <label htmlFor="lastName">Last Name</label>
+                                <input value={lastName} type="text" name="lastName" onChange={(e) => setLastName(e.target.value)} className="form-control" validations={[required]} />
+                            </div>
+
+                            <div className="form-group" style={{ padding: "10px" }}>
+                                <label htmlFor="username">Username</label>
+                                <input value={username} type="text" name="username" onChange={(e) => setUsername(e.target.value)} className="form-control" validations={[required, validUsername]} />
+                            </div>
+
+                            <div className="form-group" style={{ padding: "10px" }}>
+                                <label htmlFor="email">Email</label>
+                                <input value={email} type="text" name="email" onChange={(e) => setEmail(e.target.value)} className="form-control" validations={[required, validEmail]} />
+                            </div>
+
+                            <div className="form-group" style={{ padding: "10px" }}>
+                                <label htmlFor="password">Password</label>
+                                <input value={password} type="password" name="password" onChange={(e) => setPassword(e.target.value)} className="form-control" validations={[required, validPassword]} />
+                            </div>
+
+                            <div id="register" className="form-group" style={{ padding: "10px" }}>
+                                <button className="btn btn-primary btn-block" disabled={successful}>
+                                    {successful && (
+                                        <span className="spinner-border spinner-border-sm"></span>
+                                    )}
+                                    <span>Register</span>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {message && (
+                        <div className="form-group">
+                            <div className="alert alert-danger" role="alert">
+                                {message}
+                            </div>
+                        </div>
+                    )}
+                    <CheckButton style={{ display: "none" }} ref={checkBtn} />
+                </Form>
+
+            </div>
+        </div>
+    );
+};
+
+export default Register
