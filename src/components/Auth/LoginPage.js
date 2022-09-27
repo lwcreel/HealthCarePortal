@@ -1,83 +1,108 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Container, Row, Button } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/Auth/AuthService';
 
-class Login extends React.Component {
+import Form from "react-validation/build/form";
+import CheckButton from "react-validation/build/button";
 
-  constructor(props) {
-    super(props);
+import AuthService from "../../services/Auth/AuthService";
 
-    this.state = {
-      username: '',
-      password: '',
-      isAdmin: this.props.isAdmin
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+const required = value => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
   }
+};
 
-  onSubmit(e) {
+const Login = () => {
+
+  const handleLogin = (e) => {
 
     e.preventDefault();
-    let p = loginUser([this.state.username, this.state.password]);
-    const login = ReactDOM.createRoot(document.getElementById('login'));
-    login.render(<a href={p}>Go to Dashboard!</a>)
-  }
+    // let p = loginUser([this.state.username, this.state.password]);
+    // const login = ReactDOM.createRoot(document.getElementById('login'));
+    // login.render(<a href={p}>Go to Dashboard!</a>)
 
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
+    setMessage("");
+    setLoading(true);
 
-  render() {
-    let RegisterButton = "";
+    form.current.validateAll();
 
-    if (this.state.isAdmin === "false") {
-      RegisterButton = (
-        <Row>
-          <Link to="/register">
-            <div id="register" >
-              <input type="button" value="Register" />
-            </div >
-          </Link>
-        </Row >
+    if (checkBtn.current.context._errors.length === 0) {
+      AuthService.login(username, password).then(
+        () => {
+          navigate("/profile");
+          window.location.reload();
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          setLoading(false);
+          setMessage(resMessage);
+        }
       );
+    } else {
+      setLoading(false);
     }
-
-    return (
-      <Container fluid>
-        <div>
-          <Row>
-            <p>Please Log In</p>
-          </Row>
-          <form onSubmit={this.onSubmit}>
-            <Row>
-              <label>
-                <p>Username</p>
-                <input value={this.state.username} onChange={this.handleChange} type="text" name="username" />
-              </label>
-            </Row>
-            <Row>
-              <label>
-                <p>Password</p>
-                <input value={this.state.password} onChange={this.handleChange} type="password" name="password" />
-              </label>
-            </Row>
-            <Row>
-              <div id="login">
-                <input type="submit" value="Submit" />
-              </div>
-            </Row>
-            {RegisterButton}
-          </form>
-        </div>
-      </Container>
-    )
   }
-}
+
+  let navigate = useNavigate();
+
+  const form = useRef();
+  const checkBtn = useRef();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  return (
+    <div className="col-md-4 offset-md-4">
+      <div className="card card-container">
+
+        <Form onSubmit={handleLogin} ref={form}>
+
+          <div className="form-group" style={{padding: "10px"}}>
+            <label htmlFor="username">Username</label>
+            <input value={username} type="text" name="username" onChange={(e) => setUsername(e.target.value)} className="form-control" validations={[required]} />
+          </div>
+
+          <div className="form-group" style={{padding: "10px"}}>
+            <label htmlFor="password">Password</label>
+            <input value={password} type="password" name="password" onChange={(e) => setPassword(e.target.value)} className="form-control" validations={[required]} />
+          </div>
+
+          <div id="login" className="form-group" style={{padding: "10px"}}>
+            <button className="btn btn-primary btn-block" disabled={loading}>
+              {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
+              <span>Login</span>
+            </button>
+          </div>
+
+          {message && (
+            <div className="form-group">
+              <div className="alert alert-danger" role="alert">
+                {message}
+              </div>
+            </div>
+          )}
+          <CheckButton style={{ display: "none" }} ref={checkBtn} />
+        </Form>
+
+      </div>
+    </div>
+  );
+};
 
 export default Login;
