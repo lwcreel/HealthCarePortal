@@ -28,11 +28,14 @@ export function registerUser(data) {
 
 const API_URL = "http://localhost:8080/api/auth/";
 
-const register = (username, email, password) => {
+const register = (firstname, lastname, username, email, phonenumber, password) => {
   return axios.post(API_URL + "signup", {
+    firstname,
+    lastname,
     username,
     email,
-    password,
+    phonenumber,
+    password
   });
 };
 

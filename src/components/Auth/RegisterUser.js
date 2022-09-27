@@ -61,7 +61,7 @@ const Register = () => {
         form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
-            AuthService.register(username, password).then(
+            AuthService.register(firstName, lastName, username, email, phoneNumber, password).then(
                 (response) => {
                     setMessage(response.data.message);
                     setSuccessful(true);
@@ -90,6 +90,7 @@ const Register = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState(0);
     const [password, setPassword] = useState("");
     const [successful, setSuccessful] = useState(false);
     const [message, setMessage] = useState("");
@@ -119,6 +120,11 @@ const Register = () => {
                             <div className="form-group" style={{ padding: "10px" }}>
                                 <label htmlFor="email">Email</label>
                                 <input value={email} type="text" name="email" onChange={(e) => setEmail(e.target.value)} className="form-control" validations={[required, validEmail]} />
+                            </div>
+
+                            <div className="form-group" style={{ padding: "10px" }}>
+                                <label htmlFor="phoneNumber">Phone Number</label>
+                                <input value={phoneNumber} type="text" name="phoneNumber" onChange={(e) => setPhoneNumber(e.target.value)} className="form-control" validations={[required]} />
                             </div>
 
                             <div className="form-group" style={{ padding: "10px" }}>
