@@ -15,8 +15,8 @@ function App() {
       <div className="App" style={{"paddingTop": "10vh"}}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login/false" element={<Login isAdmin="false" />} />
-          <Route path="/login/true" element={<Login isAdmin="true"/>} />
+          <Route path="/login" element={<Login isAdmin="false" />} />
+          <Route path="/login" element={<Login isAdmin="true"/>} />
           <Route path="/register" element={<RegisterUser />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
