@@ -1,4 +1,8 @@
 import axios from "axios";
+import authHeader from "../Auth/AuthHeader";
+
+const API_URL = "http://localhost:8080/"
+
 
 export function addMedicine(data) {
 
@@ -14,7 +18,7 @@ export function addMedicine(data) {
     };
 
     axios({
-        url: "http://localhost:8080/medicines",
+        url: API_URL + "medicines",
         method: "POST",
         data: newMedicine
     })
@@ -24,4 +28,9 @@ export function updateMedicine(data) {
 
     console.log(data);
     return data;
+}
+
+export function allMedicines() {
+
+    return axios.get(API_URL + "medicines", { headers: authHeader() });
 }

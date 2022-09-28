@@ -10,6 +10,8 @@ export default class Medicine extends Component {
         this.state = {
             medicine: this.props.medicine
         }
+
+        this.state.medicine.quantity = 0;
     }
 
     render() {
@@ -17,7 +19,7 @@ export default class Medicine extends Component {
 
             <Col lg={3}>
                 <Card className="m-2">
-                    <Card.Header>{this.state.medicine.medicineName}</Card.Header>
+                    <Card.Header>{this.state.medicine.medName}</Card.Header>
                     <Card.Body>$ {this.state.medicine.price * this.state.medicine.quantity}</Card.Body>
 
                     <Card.Body>

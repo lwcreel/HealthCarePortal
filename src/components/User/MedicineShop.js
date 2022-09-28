@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import Medicine from "../Medicine";
 import SearchBar from "./SearchBar";
 
+import { allMedicines } from "../../services/Admin/MedicineService";
+
 
 class MedicineShop extends Component {
 
@@ -11,21 +13,15 @@ class MedicineShop extends Component {
         super(props);
 
         this.state = {
-            medicines: [
-
-                { id: 1, medicineName: "Tylenol", price: 9.99, quantity: 0 },
-                { id: 2, medicineName: "Advil", price: 9.99, quantity: 0 },
-                { id: 3, medicineName: "Benadryl", price: 9.99, quantity: 0 },
-                { id: 4, medicineName: "Amoxocillin", price: 9.99, quantity: 0 }
-            ],
-
+            medicines: [],
             cart: []
         };
+
     }
 
     render() {
         return (
-            <div>
+            <div key="top">
                 <SearchBar />
                 {this.state.medicines.map((med) => {
                     return (
@@ -47,7 +43,12 @@ class MedicineShop extends Component {
 
     componentDidMount = async () => {
 
-        this.setState({ medicines: this.state.medicines });
+        const p = Promise.resolve(allMedicines())
+        p.then(value => {
+            this.setState({ medicines: value.data });
+        }).catch(err => {
+            console.log(err);
+        })
     };
 
     //executes when the user clicks on + button.
