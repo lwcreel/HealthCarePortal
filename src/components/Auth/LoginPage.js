@@ -28,9 +28,17 @@ const Login = () => {
 
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(username, password).then(
-        () => {
-          navigate("/dashboard");
-          window.location.reload();
+        (response) => {
+
+          console.log(response);
+          if (response.roles[0] === "ROLE_ADMIN") {
+            navigate("/admin");
+            window.location.reload();
+          }
+          else {
+            navigate("/dashboard");
+            window.location.reload();
+          }
         },
         (error) => {
           const resMessage =
@@ -65,17 +73,17 @@ const Login = () => {
 
         <Form onSubmit={handleLogin} ref={form}>
 
-          <div className="form-group" style={{padding: "10px"}}>
+          <div className="form-group" style={{ padding: "10px" }}>
             <label htmlFor="username">Username</label>
             <input value={username} type="text" name="username" onChange={(e) => setUsername(e.target.value)} className="form-control" validations={[required]} />
           </div>
 
-          <div className="form-group" style={{padding: "10px"}}>
+          <div className="form-group" style={{ padding: "10px" }}>
             <label htmlFor="password">Password</label>
             <input value={password} type="password" name="password" onChange={(e) => setPassword(e.target.value)} className="form-control" validations={[required]} />
           </div>
 
-          <div id="login" className="form-group" style={{padding: "10px"}}>
+          <div id="login" className="form-group" style={{ padding: "10px" }}>
             <button className="btn btn-primary btn-block" disabled={loading}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
