@@ -1,4 +1,6 @@
 import { Component } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { allMedicines } from "../../services/Admin/MedicineService";
 
 export default class ViewReports extends Component {
 
@@ -7,60 +9,88 @@ export default class ViewReports extends Component {
         super(props);
         this.state = {
 
-            reports: [{
-                orderId: "000001",
-                userId: "test",
-                medName: "Tylenol",
-                orderDate: "9/9/9999",
-                price: "9.99",
-                quantity: "3",
-                totalPrice: "3 * 9.99"
-            },
-            {
-                orderId: "00000a",
-                userId: "test",
-                medName: "Benadryl",
-                orderDate: "9/9/9999",
-                price: "9.99",
-                quantity: "1",
-                totalPrice: "1 * 9.99"
-            }]
+            values: [""],
+            reportToRender: ""
         }
     }
 
+    handleReport(report) {
+
+        switch (report) {
+            case "Medicine Report":
+                const p = Promise.resolve(allMedicines());
+                p.then(value => {
+
+                    console.log(value.data);
+                    this.setState({ values: value.data })
+                }).catch(err => {
+                    console.log(err);
+                })
+                break;
+            default:
+                return "oopsy woopsy there was a fukky wukky UwU"
+        }
+    }
+
+    handleChange(value) {
+        this.setState({ reportToRender: value })
+    }
+
     render() {
+
+        let keys = Object.keys(this.state.values[0]);
+
         return (
-            <div>
-                Report Details
-                < table >
+            <Container fluid>
+                <Row>
+                    <Col>
+                        <label>
+                            <p>Select a report to generate:</p>
+                            <select name="reports" id="allowedReports" onChange={(e) => this.handleChange(e.target.value)}>
+                                <option value="Stock Report">Stock Report</option>
+                                <option value="Sales Report">Sales Report</option>
+                                <option value="Medicine Report">Medicine Report</option>
+                                <option value="Order Report">Order Report</option>
+                                <option value="Data Report">Data Report</option>
+                            </select>
+                        </label>
+                        <input type="submit" value="Submit" onClick={() => this.handleReport(this.state.reportToRender)} />
+                    </Col>
+                </Row>
+                <table>
                     <thead>
                         <tr>
-                            <th>Order Id</th>
-                            <th>User Id</th>
+                            {/* <th>ID</th>
                             <th>Medicine Name</th>
-                            <th>Order Date</th>
+                            <th>Company Name</th>
                             <th>Price</th>
+                            <th>Uses</th>
                             <th>Quantity</th>
-                            <th>Total Price</th>
+                            <th>Expiration Date</th> */}
+                            {keys &&
+                                keys.map((key) => {
+                                    return <th>{key}</th>
+                                })
+                            }
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.reports.map((d) => {
+                        {this.state.values.map((data) => {
                             return (
-                                <tr key={d.orderId}>
-                                    <td>{d.orderId}</td>
-                                    <td>{d.userId}</td>
-                                    <td>{d.medName}</td>
-                                    <td>{d.orderDate}</td>
-                                    <td>{d.price}</td>
-                                    <td>{d.quantity}</td>
-                                    <td>{d.totalPrice}</td>
+                                <tr key={data.id}>
+                                    <td>{data.id}</td>
+                                    <td>{data.medName}</td>
+                                    <td>{data.companyName}</td>
+                                    <td>{data.price}</td>
+                                    <td>{data.uses}</td>
+                                    <td>{data.quantity}</td>
+                                    <td>{data.expDate}</td>
                                 </tr>
                             )
                         })}
                     </tbody>
-                </table >
-            </div >
+                </table>
+            </Container>
         )
     }
 }
