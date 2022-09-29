@@ -17,7 +17,7 @@ export function addMedicine(data) {
         "userList": []
     };
 
-    axios({
+    return axios({
         url: API_URL + "medicines",
         headers: authHeader(),
         method: "POST",
@@ -27,8 +27,21 @@ export function addMedicine(data) {
 
 export function updateMedicine(data) {
 
-    console.log(data);
-    return data;
+    let id = data["id"];
+    delete data["id"];
+    Object.keys(data).forEach(k => (!data[k] && data[k] !== undefined) && delete data[k]);
+
+    return axios({
+        url: API_URL + "medicines/" + id,
+        headers: authHeader(),
+        method: "PUT",
+        data: data
+    })
+}
+
+export function deleteMedicine(id) {
+
+    return axios.delete(API_URL + "medicines/" + id, { headers: authHeader() });
 }
 
 export function allMedicines() {

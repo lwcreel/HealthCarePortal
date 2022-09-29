@@ -1,6 +1,5 @@
 import AddMedForm from "./Forms/AddMedForm";
 import DeleteMedForm from "./Forms/DeleteMedForm";
-import ReportForm from "./Forms/ReportForm";
 import UpdateMedForm from "./Forms/UpdateMedForm";
 import ViewReports from "./ViewReports";
 
@@ -11,9 +10,6 @@ export default function FormManager(formToRender) {
     console.log(formToRender);
 
     switch (formToRender.formToRender) {
-        case 0:
-            form = <ReportForm />;
-            break;
         case 1:
             form = <AddMedForm />;
             break;

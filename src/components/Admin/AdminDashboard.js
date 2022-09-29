@@ -23,11 +23,9 @@ export default class AdminDashboard extends Component {
 
     return (
       <Container>
-
         <Navbar variant="primary" bg="primary" fixed="top">
           <Nav justify variant="pills" className='me-auto'>
             <Nav.Link onClick={(e) => this.handleFormChange(99, e)}> Home </Nav.Link>
-            <Nav.Link onClick={(e) => this.handleFormChange(0, e)}>Generate Report</Nav.Link>
             <NavDropdown title="Data Operations">
               <NavDropdown.Item onClick={(e) => this.handleFormChange(1, e)}>Add New Medicine</NavDropdown.Item>
               <NavDropdown.Item onClick={(e) => this.handleFormChange(2, e)}>Update Medicine</NavDropdown.Item>

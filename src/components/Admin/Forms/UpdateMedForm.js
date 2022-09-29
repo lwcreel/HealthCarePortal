@@ -4,6 +4,7 @@ import { updateMedicine } from '../../../services/Admin/MedicineService';
 
 export default function UpdateMedForm() {
 
+    let [medId, setMedId] = useState("")
     let [medName, setMedName] = useState("");
     let [companyName, setCompanyName] = useState("");
     let [price, setPrice] = useState("");
@@ -17,6 +18,7 @@ export default function UpdateMedForm() {
                 <form onSubmit={(e) => {
                     e.preventDefault();
                     setData({
+                        id: medId,
                         medName: medName,
                         companyName: companyName,
                         price: price,
@@ -25,6 +27,11 @@ export default function UpdateMedForm() {
                     });
                     updateMedicine(data);
                 }}>
+
+                    <Row>
+                        <label>Medicine ID</label>
+                        <input value={medId} onChange={(e) => setMedId(e.target.value)} type="text" name="medId" />
+                    </Row>
                     <Row>
                         <label>Medicine Name</label>
                         <input value={medName} onChange={(e) => setMedName(e.target.value)} type="text" name="medName" />

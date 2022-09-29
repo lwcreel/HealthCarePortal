@@ -61,13 +61,6 @@ export default class ViewReports extends Component {
                 <table>
                     <thead>
                         <tr>
-                            {/* <th>ID</th>
-                            <th>Medicine Name</th>
-                            <th>Company Name</th>
-                            <th>Price</th>
-                            <th>Uses</th>
-                            <th>Quantity</th>
-                            <th>Expiration Date</th> */}
                             {keys &&
                                 keys.map((key) => {
                                     return <th>{key}</th>
