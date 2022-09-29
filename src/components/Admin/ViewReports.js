@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { allMedicines } from "../../services/Admin/MedicineService";
+import { listUsers } from "../../services/Admin/ReportService";
 
 export default class ViewReports extends Component {
 
@@ -16,20 +17,38 @@ export default class ViewReports extends Component {
 
     handleReport(report) {
 
+        let p = '';
+
         switch (report) {
             case "Medicine Report":
-                const p = Promise.resolve(allMedicines());
+                p = Promise.resolve(allMedicines());
                 p.then(value => {
-                    console.log(value.data);
                     this.setState({ values: value.data })
                 }).catch(err => {
                     console.log(err);
                 })
                 break;
             case "User Report":
+                p = Promise.resolve(listUsers());
+                p.then(value => {
+
+                    for (let i = 0; i < value.data.length; i++) {
+                        
+                        delete value.data[i].medCart;
+                        delete value.data[i].password;
+                        delete value.data[i].reportList;
+                        delete value.data[i].roles;
+                    }   
+                    console.log(value.data)
+
+
+                    this.setState({ values: value.data })
+                }).catch(err => {
+                    console.log(err);
+                })
                 break;
             default:
-                return "oopsy woopsy there was a fukky wukky UwU"
+                return "Failed to load a report"
         }
     }
 
@@ -69,16 +88,19 @@ export default class ViewReports extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.values.map((data) => {
+                        {this.state.values && this.state.values.map((data) => {
                             return (
-                                <tr key={data.id}>
-                                    <td>{data.id}</td>
-                                    <td>{data.medName}</td>
-                                    <td>{data.companyName}</td>
-                                    <td>{data.price}</td>
-                                    <td>{data.uses}</td>
-                                    <td>{data.quantity}</td>
-                                    <td>{data.expDate}</td>
+                                <tr>
+                                    {keys.map(key => {
+
+
+                                        if (data[key] !== []) {
+                                            return <td>{data[key]}</td>
+                                        }
+                                        else {
+                                            return "";
+                                        }
+                                    })}
                                 </tr>
                             )
                         })}
