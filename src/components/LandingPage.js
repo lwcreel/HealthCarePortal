@@ -22,13 +22,13 @@ function LandingPage() {
                     <Link to="/login">
                         <img className="Link-logo" src={userLogo} alt="User Portal Icon" />
                     </Link>
-                    <h4>User Login</h4>
+                    <h4>Login</h4>
                 </Col>
                 <Col lg={6}>
-                    <Link to="/login">
-                        <img className="Link-logo" src={adminLogo} alt="Admin Portal Icon" />
+                    <Link to="/register">
+                        <img className="Link-logo" src={adminLogo} alt="Registration Portal Icon" />
                     </Link>
-                    <h4>Admin Login</h4>
+                    <h4>Register</h4>
                 </Col>
             </Row>
         </Container>
