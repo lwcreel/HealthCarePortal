@@ -20,12 +20,13 @@ export default class ViewReports extends Component {
             case "Medicine Report":
                 const p = Promise.resolve(allMedicines());
                 p.then(value => {
-
                     console.log(value.data);
                     this.setState({ values: value.data })
                 }).catch(err => {
                     console.log(err);
                 })
+                break;
+            case "User Report":
                 break;
             default:
                 return "oopsy woopsy there was a fukky wukky UwU"
@@ -47,7 +48,7 @@ export default class ViewReports extends Component {
                         <label>
                             <p>Select a report to generate:</p>
                             <select name="reports" id="allowedReports" onChange={(e) => this.handleChange(e.target.value)}>
-                                <option value="Stock Report">Stock Report</option>
+                                <option value="User Report">User Report</option>
                                 <option value="Sales Report">Sales Report</option>
                                 <option value="Medicine Report">Medicine Report</option>
                                 <option value="Order Report">Order Report</option>

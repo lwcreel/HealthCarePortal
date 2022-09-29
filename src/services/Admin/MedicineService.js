@@ -19,6 +19,7 @@ export function addMedicine(data) {
 
     axios({
         url: API_URL + "medicines",
+        headers: authHeader(),
         method: "POST",
         data: newMedicine
     })
