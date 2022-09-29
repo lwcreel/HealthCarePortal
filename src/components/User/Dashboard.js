@@ -5,6 +5,7 @@ import Cart from './Cart';
 import MedicineShop from './MedicineShop';
 import OrderStatus from './OrderStatus';
 import SearchBar from './SearchBar';
+import AuthService from "../../services/Auth/AuthService";
 
 
 class Dashboard extends Component {
@@ -58,6 +59,7 @@ class Dashboard extends Component {
             </Nav.Link>
             <Nav.Link to="/profile" onClick={(e) => this.handleComponentChange(<Profile />)}> Profile </Nav.Link>
             <Nav.Link to="/dashboard/funds"> ${this.state.availableFunds} </Nav.Link>
+            <Nav.Link href="/" onClick={() => AuthService.logout()}> Sign Out </Nav.Link>
           </Nav>
         </Navbar></Col></Row>
         <Row><Col>{this.state.componentToRender}</Col></Row>

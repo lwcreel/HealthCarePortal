@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import FormManager from './FormManager';
+import AuthService from "../../services/Auth/AuthService";
 
 export default class AdminDashboard extends Component {
 
@@ -34,7 +35,7 @@ export default class AdminDashboard extends Component {
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={(e) => this.handleFormChange(4, e)}>View Reports</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link> Sign Out </Nav.Link>
+            <Nav.Link href="/" onClick={() => AuthService.logout()}> Sign Out </Nav.Link>
           </Nav>
         </Navbar>
         <FormManager formToRender={this.state.formToRender} />
