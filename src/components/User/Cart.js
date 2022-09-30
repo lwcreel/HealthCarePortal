@@ -8,10 +8,7 @@ export default class Cart extends Component {
 
         super(props);
         this.state = {
-            cart: [
-                { id: 1, medicineName: "Tylenol", price: 9.99, quantity: 3 },
-                { id: 3, medicineName: "Benadryl", price: 9.99, quantity: 1 },
-            ]
+            cart: window.sessionStorage.getItem("userCart")
         };
     }
 
@@ -42,6 +39,11 @@ export default class Cart extends Component {
             this.setState({ medicines: allMeds });
         }
     };
+
+    componentDidMount() {
+
+        this.setState({ cart: window.sessionStorage.getItem("userCart") });
+    }
 
     render() {
         return (

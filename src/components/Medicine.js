@@ -3,29 +3,29 @@ import { Col, Card, ButtonGroup, Button } from 'react-bootstrap';
 
 
 export default class Medicine extends Component {
-
+ 
     constructor(props) {
 
         super(props);
-        this.state = {
-            medicine: this.props.medicine
+        this.state = {   
+            medicine: this.props.medicine  
         }
-
-        this.state.medicine.quantity = 0;
     }
 
     render() {
-        return (
-
+        return ( 
             <Col lg={3}>
-                <Card className="m-2">
+                <Card className="m-2"> 
                     <Card.Header>{this.state.medicine.medName}</Card.Header>
                     <Card.Body>$ {this.state.medicine.price * this.state.medicine.quantity}</Card.Body>
 
                     <Card.Body>
                         <span className="badge">{this.state.medicine.quantity}</span>
                         <ButtonGroup>
-                            <Button variant="outline-success" onClick={() => { this.props.onIncrement(this.state.medicine, 10); }}>
+                            <Button variant="outline-success" onClick={() => { 
+                                this.props.onIncrement(this.state.medicine, 10); 
+                                console.log(this.state.medicine);
+                                }}>
                                 +
                             </Button>
 
@@ -36,12 +36,16 @@ export default class Medicine extends Component {
 
                         <div>{this.props.children}</div>
 
-                    </Card.Body>
+                    </Card.Body> 
                 </Card>
             </Col>
-        );
-    }
+        ); 
+    } 
 
-    componentDidUpdate() {
-      }
+    componentDidUpdate(prevProps, prevState) {
+
+        if (prevProps.medicine !== this.state.medicine) {
+            this.setState({ medicine: prevProps.medicine });   
+        }
+    }
 }
