@@ -22,10 +22,7 @@ export default class Medicine extends Component {
                     <Card.Body>
                         <span className="badge">{this.state.medicine.quantity}</span>
                         <ButtonGroup>
-                            <Button variant="outline-success" onClick={() => { 
-                                this.props.onIncrement(this.state.medicine, 10); 
-                                console.log(this.state.medicine);
-                                }}>
+                            <Button variant="outline-success" onClick={() => { this.props.onIncrement(this.state.medicine, 10); }}>
                                 +
                             </Button>
 

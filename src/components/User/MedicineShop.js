@@ -30,12 +30,19 @@ class MedicineShop extends Component {
                             onIncrement={this.handleIncrement}
                             onDecrement={this.handleDecrement}
                         >
-                            <Button variant="primary" onClick={() => { this.addToCart(med) }}>Add to Cart</Button>
+                            <Button variant="primary" onClick={() => {
+                                let newCart = this.state.cart;
+                                newCart.push(med);
+                                this.setState({ cart: newCart });
+                            }}>Add to Cart</Button>
                         </Medicine>
                     );
                 })}
 
-                <Button variant="primary" style={{ "padding": "10px" }}><h2>Add Selected to Cart</h2></Button>
+                <Button variant="primary" onClick={() => {
+                    console.log(this.state.cart);
+                    this.props.handleCart(this.state.cart);
+                }} style={{ "padding": "10px" }}><h2>Save Cart</h2></Button>
             </div>
         );
     }
@@ -51,7 +58,7 @@ class MedicineShop extends Component {
             this.setState({ medicines: value.data });
         }).catch(err => {
             console.log(err);
-        })  
+        })
     };
 
 
@@ -62,9 +69,9 @@ class MedicineShop extends Component {
     handleIncrement = (medicine, maxValue) => {
         //get index of selected medicine
         let allMeds = this.state.medicines;
-        let index = 0; 
+        let index = 0;
 
-        for (let i = 0; i < allMeds.length; i++) {  
+        for (let i = 0; i < allMeds.length; i++) {
 
             if (allMeds[i].id === medicine.id) {
                 index = i;
@@ -102,20 +109,7 @@ class MedicineShop extends Component {
         }
     };
 
-    addToCart = (medicine) => {
 
-        console.log(this.cart);
-   
-        if (medicine.quantity > 0) {
-            let newCart = [...this.state.cart];
-            newCart.push(medicine);
-            this.setState({ cart: newCart });
-            window.sessionStorage.setItem("userCart", this.state.cart);
-        }
-        console.log(this.state.cart);
-    };
-
-    
 }
 
 export default MedicineShop

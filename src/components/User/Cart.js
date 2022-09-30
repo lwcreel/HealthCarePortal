@@ -8,7 +8,7 @@ export default class Cart extends Component {
 
         super(props);
         this.state = {
-            cart: window.sessionStorage.getItem("userCart")
+            cart: this.props.cart
         };
     }
 
@@ -29,7 +29,7 @@ export default class Cart extends Component {
     //executes when the user clicks on - button.
     handleDecrement = (medicine, minValue) => {
         //get index of selected medicine
-        let allMeds = [...this.state.medicines];
+        let allMeds = [...this.state.cart];
         let index = allMeds.indexOf(medicine);
 
         if (allMeds[index].quantity > minValue) {
@@ -40,28 +40,41 @@ export default class Cart extends Component {
         }
     };
 
-    componentDidMount() {
-
-        this.setState({ cart: window.sessionStorage.getItem("userCart") });
+    handleCheckout = (checkoutFunc) => {
+        checkoutFunc(this.state.cart);
     }
 
+    // componentDidMount() {
+
+    //     this.setState({ cart: })
+    // }
+
     render() {
-        return (
-            <div>
-                {this.state.cart.map((med) => {
-                    return (
-                        <Medicine
-                            medicine={med}
-                            key={med.id}
-                            onIncrement={this.handleIncrement}
-                            onDecrement={this.handleDecrement}
-                        >
-                        </Medicine>
-                    );
-                })}
-                <Button variant="primary" style={{ "padding": "10px" }}><h2>Checkout</h2></Button>
-            </div>
-        );
+
+        // console.log(this.state.cart);
+
+        if (this.state.cart) {
+            console.log("pre-map call: " + this.state.cart);
+            return (
+                <div>
+                    {this.state.cart.map((med) => {
+                        return (
+                            <Medicine
+                                medicine={med}
+                                key={med.id}
+                                onIncrement={this.handleIncrement}
+                                onDecrement={this.handleDecrement}
+                            >
+                            </Medicine>
+                        );
+                    })}
+                    <Button variant="primary" style={{ "padding": "10px" }} onClick={() => this.props.handleCheckout(this.state.cart)}><h2>Checkout</h2></Button>
+                </div>
+            );
+        }
+        else {
+            return <div></div>;
+        }
     }
 }
 
