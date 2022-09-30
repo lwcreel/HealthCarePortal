@@ -1,6 +1,6 @@
-FROM node
-WORKDIR /app
-COPY package.json .
+FROM node:latest
+WORKDIR /health-care-portal
+COPY package.json ./
 RUN npm install
 COPY . .
 EXPOSE 3000
